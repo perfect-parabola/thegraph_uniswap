@@ -42,6 +42,7 @@ query = """{
         dailyVolumeETH
         dailyVolumeUSD
         dailyVolumeToken
+		priceUSD
     }
 }
 """ %(token_id, start_date, end_date)
@@ -55,9 +56,9 @@ filename = 'data/TokenDayData_{}_{}.csv'.format(
 )
 with open(filename, mode='w') as csv_file:
     csv_writer = csv.writer(csv_file)
-    csv_writer.writerow(['날짜', '토큰', '거래량(ETH)', '거래량(USD)', '거래량(token)'])
+    csv_writer.writerow(['날짜', '토큰', '거래량(ETH)', '거래량(USD)', '거래량(token)','USD가격'])
     for data in json_data.get('data').get('tokenDayDatas'):
         csv_writer.writerow([
             toString(data.get('date')), token_name,
-            data.get('dailyVolumeETH'), data.get('dailyVolumeUSD'), data.get('dailyVolumeToken')
+            data.get('dailyVolumeETH'), data.get('dailyVolumeUSD'), data.get('dailyVolumeToken'),data.get('priceUSD')
         ])
