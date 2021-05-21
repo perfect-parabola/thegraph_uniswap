@@ -17,7 +17,9 @@ query = """{
     orderBy: txCount
     orderDirection:desc
     first:1
-    symbol:%s
+    where: {
+        symbol:"%s"
+    }
     ) {
         id
         name
@@ -28,6 +30,8 @@ r = requests.post(url, json={'query': query})
 json_data = json.loads(r.text)
 token_id = json_data.get('data').get('tokens')[0].get('id')
 token_name = json_data.get('data').get('tokens')[0].get('name')
+print(token_id)
+print(token_name)
 
 query = """{
     tokenDayDatas(
